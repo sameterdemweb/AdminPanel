@@ -53,9 +53,6 @@
                                         @Html.DisplayNameFor(model => model.KisaAciklama)
                                     </th>
                                     <th>
-                                        @Html.DisplayNameFor(model => model.Icerik)
-                                    </th>
-                                    <th>
                                         @Html.DisplayNameFor(model => model.BlogKategori)
                                     </th>
                                     <th>İşlemler</th>
@@ -71,21 +68,18 @@
                                             @Html.DisplayFor(modelItem => item.Baslik)
                                         </td>
                                         <td>
-                                            @Html.DisplayFor(modelItem => item.Resim)
+                                            <img width="100px" src="~/yuklenenResimler/@item.Resim" alt="" />
                                         </td>
                                         <td>
                                             @Html.DisplayFor(modelItem => item.KisaAciklama)
                                         </td>
                                         <td>
-                                            @Html.DisplayFor(modelItem => item.Icerik)
-                                        </td>
-                                        <td>
                                             @Html.DisplayFor(modelItem => item.BlogKategori.KategoriAdi)
                                         </td>
                                         <td>
-                                            <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                                            <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                                            <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                                            <a asp-action="Edit" asp-route-id="@item.Id">Düzenle</a> |
+                                            <a asp-action="Details" asp-route-id="@item.Id">Detay</a> |
+                                            <a asp-action="Delete" asp-route-id="@item.Id">Sil</a>
                                         </td>
                                     </tr>
                                 }

@@ -13,10 +13,12 @@ namespace AdminPanel.Controllers
     public class BloglarController : Controller
     {
         private readonly AdminPanelContext _context;
+        private readonly IWebHostEnvironment _host; //IWebHostEnvironment www root için hosting kütüphanesini entegre ettik.
 
-        public BloglarController(AdminPanelContext context)
+        public BloglarController(AdminPanelContext context, IWebHostEnvironment host)
         {
             _context = context;
+            _host = host;
         }
 
         // GET: Bloglar
@@ -57,10 +59,25 @@ namespace AdminPanel.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,KategoriId,Durum,Baslik,Resim,KisaAciklama,Icerik")] Bloglar bloglar)
+        public async Task<IActionResult> Create([Bind("Id,KategoriId,Durum,Baslik,ResimDosya,KisaAciklama,Icerik")] Bloglar bloglar)
         {
             if (ModelState.IsValid)
             {
+                // wwwroot/YuklenenResimler klasörüne resim yükleme işlemi
+                string wwwRootPath = _host.WebRootPath;
+                string fileName = Path.GetFileNameWithoutExtension(bloglar.ResimDosya.FileName);//Dosya Adını Aldık.
+                string extension = Path.GetExtension(bloglar.ResimDosya.FileName);//Yüklenen Resmin Uzantısını Aldık.
+                fileName = fileName + DateTime.Now.ToString("yymmssfff") + extension;
+                string path = Path.Combine(wwwRootPath, "YuklenenResimler/", fileName);
+                using (var fileStream = new FileStream(path, FileMode.Create))
+                {
+                    await bloglar.ResimDosya.CopyToAsync(fileStream);
+                }
+
+                bloglar.Resim = fileName;
+                // wwwroot/YuklenenResimler klasörüne resim yükleme işlemi
+
+
                 _context.Add(bloglar);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
@@ -91,7 +108,7 @@ namespace AdminPanel.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,KategoriId,Durum,Baslik,Resim,KisaAciklama,Icerik")] Bloglar bloglar)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,KategoriId,Durum,Baslik,ResimDosya,KisaAciklama,Icerik")] Bloglar bloglar)
         {
             if (id != bloglar.Id)
             {
@@ -102,6 +119,21 @@ namespace AdminPanel.Controllers
             {
                 try
                 {
+                    // wwwroot/YuklenenResimler klasörüne resim yükleme işlemi
+                    string wwwRootPath = _host.WebRootPath;
+                    string fileName = Path.GetFileNameWithoutExtension(bloglar.ResimDosya.FileName);//Dosya Adını Aldık.
+                    string extension = Path.GetExtension(bloglar.ResimDosya.FileName);//Yüklenen Resmin Uzantısını Aldık.
+                    fileName = fileName + DateTime.Now.ToString("yymmssfff") + extension;
+                    string path = Path.Combine(wwwRootPath, "YuklenenResimler/", fileName);
+                    using (var fileStream = new FileStream(path, FileMode.Create))
+                    {
+                        await bloglar.ResimDosya.CopyToAsync(fileStream);
+                    }
+
+                    bloglar.Resim = fileName;
+                    // wwwroot/YuklenenResimler klasörüne resim yükleme işlemi
+
+
                     _context.Update(bloglar);
                     await _context.SaveChangesAsync();
                 }
@@ -153,6 +185,15 @@ namespace AdminPanel.Controllers
             var bloglar = await _context.Bloglar.FindAsync(id);
             if (bloglar != null)
             {
+
+                //Resim Silindiyse Klasör içerisinden de sildireceğiz. Kök dizin klasöründen de silinecek.
+                var resimYolu = Path.Combine(_host.WebRootPath, "YuklenenResimler", bloglar.Resim);
+                if (System.IO.File.Exists(resimYolu))//Bu belirlenen yolda bir dosya var mı?
+                {
+                    System.IO.File.Delete(resimYolu);//Buyoldaki dosyayı sil
+                }
+                //Resim Silindiyse Klasör içerisinden de sildireceğiz.
+
                 _context.Bloglar.Remove(bloglar);
             }
             

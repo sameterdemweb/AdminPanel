@@ -28,6 +28,8 @@
         
       <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
       <link rel="stylesheet" href="~/AdminPanel.styles.css" asp-append-version="true" />
+
+      @await RenderSectionAsync("Css", required: false)
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
     
@@ -241,7 +243,7 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a asp-controller="Bloglar" class="nav-link">
+                <a asp-controller="Bloglar" asp-action="Index" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Blog Yazıları</p>
                 </a>
@@ -390,6 +392,7 @@
 
 
  @await RenderSectionAsync("Scripts", required: false)
+ 
 
 
 </body>

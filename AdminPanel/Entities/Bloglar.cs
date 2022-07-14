@@ -23,6 +23,10 @@ namespace AdminPanel.Entities
 
         [ForeignKey("KategoriId")]
         public virtual BlogKategorileri? BlogKategori { get; set; }
+
+        [NotMapped,Display(Name = "ResimDosyasi")]
+        public IFormFile ResimDosya { get; set; }
+
     }
     
 }
