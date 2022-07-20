@@ -12,5 +12,8 @@ namespace AdminPanel.Identity
 
         public DbSet<BlogKategorileri> BlogKategorileri { get; set; }
         public DbSet<Bloglar> Bloglar { get; set; }
+        public DbSet<ReferansKategoriler> ReferansKategoriler{ get; set; }
+        public DbSet<Referanslar> Referanslar { get; set; }
+
     }
 }

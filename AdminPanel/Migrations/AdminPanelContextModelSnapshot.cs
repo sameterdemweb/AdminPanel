@@ -82,6 +82,66 @@ namespace AdminPanel.Migrations
                     b.ToTable("Bloglar");
                 });
 
+            modelBuilder.Entity("AdminPanel.Entities.ReferansKategoriler", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<int>("Durum")
+                        .HasColumnType("int");
+
+                    b.Property<string>("KategoriAdi")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("UstKategoriId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UstKategoriId");
+
+                    b.ToTable("ReferansKategoriler");
+                });
+
+            modelBuilder.Entity("AdminPanel.Entities.Referanslar", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("Baslik")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Durum")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Icerik")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("KategoriId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("KisaAciklama")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Resim")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("KategoriId");
+
+                    b.ToTable("Referanslar");
+                });
+
             modelBuilder.Entity("AdminPanel.Entities.BlogKategorileri", b =>
                 {
                     b.HasOne("AdminPanel.Entities.BlogKategorileri", "BlogKategori")
@@ -102,9 +162,34 @@ namespace AdminPanel.Migrations
                     b.Navigation("BlogKategori");
                 });
 
+            modelBuilder.Entity("AdminPanel.Entities.ReferansKategoriler", b =>
+                {
+                    b.HasOne("AdminPanel.Entities.ReferansKategoriler", "ReferansKategori")
+                        .WithMany()
+                        .HasForeignKey("UstKategoriId");
+
+                    b.Navigation("ReferansKategori");
+                });
+
+            modelBuilder.Entity("AdminPanel.Entities.Referanslar", b =>
+                {
+                    b.HasOne("AdminPanel.Entities.ReferansKategoriler", "ReferansKategori")
+                        .WithMany("Referans")
+                        .HasForeignKey("KategoriId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("ReferansKategori");
+                });
+
             modelBuilder.Entity("AdminPanel.Entities.BlogKategorileri", b =>
                 {
                     b.Navigation("Bloglar");
+                });
+
+            modelBuilder.Entity("AdminPanel.Entities.ReferansKategoriler", b =>
+                {
+                    b.Navigation("Referans");
                 });
 #pragma warning restore 612, 618
         }

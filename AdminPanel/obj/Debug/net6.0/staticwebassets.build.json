@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "WjU4ib4amTviT9r0I93zplNPychcwMLOSPYjJapK2LE=",
+  "Hash": "FRGkUARX7VKdtRN87IXySPNVGPd2frRDN/CFLvasOvI=",
   "Source": "AdminPanel",
   "BasePath": "_content/AdminPanel",
   "Mode": "Default",
@@ -41886,40 +41886,6 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\yuklenenResimler\\businessman-pointing-his-presentation-futuristic-digital-screen225410485.jpg"
-    },
-    {
-      "Identity": "D:\\AspNet\\AdminPanel\\AdminPanel\\wwwroot\\yuklenenResimler\\close-up-hand-holding-smartphone221419055.jpg",
-      "SourceId": "AdminPanel",
-      "SourceType": "Discovered",
-      "ContentRoot": "D:\\AspNet\\AdminPanel\\AdminPanel\\wwwroot\\",
-      "BasePath": "_content/AdminPanel",
-      "RelativePath": "yuklenenResimler/close-up-hand-holding-smartphone221419055.jpg",
-      "AssetKind": "All",
-      "AssetMode": "All",
-      "AssetRole": "Primary",
-      "RelatedAsset": "",
-      "AssetTraitName": "",
-      "AssetTraitValue": "",
-      "CopyToOutputDirectory": "Never",
-      "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\yuklenenResimler\\close-up-hand-holding-smartphone221419055.jpg"
-    },
-    {
-      "Identity": "D:\\AspNet\\AdminPanel\\AdminPanel\\wwwroot\\yuklenenResimler\\corporate-business-handshake-business-partners220445344.jpg",
-      "SourceId": "AdminPanel",
-      "SourceType": "Discovered",
-      "ContentRoot": "D:\\AspNet\\AdminPanel\\AdminPanel\\wwwroot\\",
-      "BasePath": "_content/AdminPanel",
-      "RelativePath": "yuklenenResimler/corporate-business-handshake-business-partners220445344.jpg",
-      "AssetKind": "All",
-      "AssetMode": "All",
-      "AssetRole": "Primary",
-      "RelatedAsset": "",
-      "AssetTraitName": "",
-      "AssetTraitValue": "",
-      "CopyToOutputDirectory": "Never",
-      "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\yuklenenResimler\\corporate-business-handshake-business-partners220445344.jpg"
     },
     {
       "Identity": "D:\\AspNet\\AdminPanel\\AdminPanel\\wwwroot\\yuklenenResimler\\Ekran Alıntısı225059298.jpg",
